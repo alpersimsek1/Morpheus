@@ -1,15 +1,11 @@
 package com.proente.ML
 
+import com.proente.SparkSessionBuilder
 import org.apache.spark.sql.SparkSession
 
-object ModelTrain {
+object ModelTrain extends SparkSessionBuilder{
 
   val appName = "Model Training"
 
-  val spark: SparkSession = SparkSession
-    .builder()
-    .master("local[*]")
-    .appName(appName)
-    .getOrCreate()
-
+  override def run(spark: SparkSession): Unit = ???
 }
