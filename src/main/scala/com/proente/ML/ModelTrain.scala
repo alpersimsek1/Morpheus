@@ -9,8 +9,8 @@ object ModelTrain extends SparkSessionBuilder{
 
   override def run(spark: SparkSession): Unit = {
     val lines = spark.readStream
-      .format("amqp")
-      .option("host", "amqp://dev.prowmes.com")
+      .format("rabbitmq")
+      .option("host", "dev.prowmes.com")
       .option("queue","processed_machine_action_notif")
       .load()
 
