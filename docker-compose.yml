@@ -24,6 +24,7 @@ services:
       - "constraint:node==<yourworkernode>"
     links:
       - rabbitmq
+    env_file: env/spark-worker.sh
   spark-worker-2:
     image: bde2020/spark-worker:2.4.0-hadoop2.7
     container_name: spark-worker-2
@@ -36,6 +37,7 @@ services:
       - "constraint:node==<yourworkernode>"
     links:
       - rabbitmq
+    env_file: env/spark-worker.sh
   rabbitmq:
     image: 'bitnami/rabbitmq:latest'
     container_name: rabbit

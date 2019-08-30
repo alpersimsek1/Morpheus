@@ -8,7 +8,7 @@ trait SparkSessionBuilder extends Serializable {
 
     val spark: SparkSession = SparkSession
       .builder()
-//      .master("local[*]")
+      .master("local[*]")
       .appName(appName)
       .getOrCreate()
 
