@@ -12,8 +12,31 @@ or mount volume
 
 **Spark Master**
 
-```spark://spark-master:7077 ```
+```
+spark://spark-master:7077 
+```
 
 *ui*
 
-```http://localhost:8080/```
+```
+http://localhost:8080/
+```
+
+**Cassandra**
+
+````
+cqlsh -u cassandra -p cassandra
+
+create keyspace ford with replication = {       
+ 'class' : 'SimpleStrategy', 'replication_factor' :4
+  } ;
+
+CREATE TABLE ford.machine_data (value text, primary key (value) );
+````
+
+
+**Docker compose**
+
+```
+docker-compose -p spark -f docker-compose.yml down -v --remove-orphans
+```
