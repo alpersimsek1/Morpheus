@@ -7,7 +7,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    image: wurstmeister/kafka:2.12-2.1.0
+    image: wurstmeister/kafka:2.12-2.2.1
     links:
       - zookeeper
     hostname: kafka
@@ -17,7 +17,7 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_CREATE_TOPICS: "test_topic_status:1:3,test_topic_offset:1:3,test_topic_config:1:3,"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     depends_on:
       - zookeeper
@@ -45,9 +45,9 @@ services:
       CONNECT_BOOTSTRAP_SERVERS: "kafka:9092"
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: compose-connect-group
-      CONNECT_CONFIG_STORAGE_TOPIC: test
-      CONNECT_OFFSET_STORAGE_TOPIC: test
-      CONNECT_STATUS_STORAGE_TOPIC: test
+      CONNECT_CONFIG_STORAGE_TOPIC: test_topic_config
+      CONNECT_OFFSET_STORAGE_TOPIC: test_topic_offset
+      CONNECT_STATUS_STORAGE_TOPIC: test_topic_status
       CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
@@ -57,9 +57,9 @@ services:
       CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect"
       CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
       CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
-      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "3"
-      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "3"
-      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "3"
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components/'
       CONNECT_HOST: kafka-connect
   cassandra:
