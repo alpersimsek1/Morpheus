@@ -12,5 +12,5 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming" % sparkVersion, // % "provided" ,
   "org.apache.spark" %% "spark-hive" % sparkVersion, // % "provided",
   "org.apache.spark" %% "spark-mllib" % sparkVersion, // % "provided"
-  "com.stratio.receiver" % "spark-rabbitmq" % "0.5.1"
+  "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion
 )
