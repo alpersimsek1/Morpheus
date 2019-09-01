@@ -19,5 +19,6 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-hive" % sparkVersion % "provided",
   "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided",
   "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion,
-  "com.datastax.spark" %% "spark-cassandra-connector" % "2.4.0"
+  "com.datastax.spark" %% "spark-cassandra-connector" % "2.4.0",
+  "io.spray" %%  "spray-json" % "1.3.4"
 )
