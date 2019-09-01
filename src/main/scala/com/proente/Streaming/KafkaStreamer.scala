@@ -1,9 +1,7 @@
 package com.proente.Streaming
 
 import com.proente.SparkSessionBuilder
-import com.proente.Util.CassandraSink
-import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
-import com.datastax.spark.connector.streaming._
+import org.apache.spark.sql.{Dataset, SaveMode, SparkSession}
 import com.proente.Util.Helper._
 
 object KafkaStreamer extends SparkSessionBuilder {
@@ -20,6 +18,7 @@ object KafkaStreamer extends SparkSessionBuilder {
 
     val ds = df.selectExpr("CAST(value AS STRING)")
       .as[String]
+    //      .map(parseMachineDataJson)
 
     val query = ds.writeStream
       .outputMode("update")
@@ -30,7 +29,7 @@ object KafkaStreamer extends SparkSessionBuilder {
             .write
             .format("org.apache.spark.sql.cassandra")
             .options(Map("keyspace" -> "ford", "table" -> "machine"))
-            .partitionBy("timestamp")
+            .partitionBy("machine_id")
             .mode(SaveMode.Append)
             .save()
       }
