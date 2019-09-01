@@ -9,6 +9,7 @@ sbt assembly
 **Docker compose**
 
 ```
+docker-compose -p spark -f docker-compose.yml up -d --remove-orphans
 docker-compose -p spark -f docker-compose.yml down -v --remove-orphans
 ```
 

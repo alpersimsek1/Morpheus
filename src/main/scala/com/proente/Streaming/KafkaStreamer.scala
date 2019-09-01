@@ -4,6 +4,7 @@ import com.proente.SparkSessionBuilder
 import com.proente.Util.CassandraSink
 import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 import com.datastax.spark.connector.streaming._
+import com.proente.Util.Helper._
 
 object KafkaStreamer extends SparkSessionBuilder {
   override def run(spark: SparkSession): Unit = {
@@ -14,7 +15,7 @@ object KafkaStreamer extends SparkSessionBuilder {
       .format("kafka")
       .option("kafka.bootstrap.servers", "kafka:9092")
       .option("subscribe", "test")
-      .option("startingOffsets", "latest")
+      .option("startingOffsets", "earliest")
       .load()
 
     val ds = df.selectExpr("CAST(value AS STRING)")
@@ -25,9 +26,11 @@ object KafkaStreamer extends SparkSessionBuilder {
       .foreachBatch {
         (batchDF: Dataset[String], batchId: Long) =>
           batchDF
+            .map(parseMachineDataJson)
             .write
             .format("org.apache.spark.sql.cassandra")
-            .options(Map("keyspace" -> "ford", "table" -> "machine_data"))
+            .options(Map("keyspace" -> "ford", "table" -> "parsed_machine_data"))
+            .partitionBy("timestamp")
             .mode(SaveMode.Append)
             .save()
       }
