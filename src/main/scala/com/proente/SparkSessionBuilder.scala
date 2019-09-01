@@ -6,9 +6,16 @@ trait SparkSessionBuilder extends Serializable {
 
   def main(args: Array[String]): Unit = {
 
+    val host = "cassandra"
+    val username = "cassandra"
+    val password = "cassandra"
+
     val spark: SparkSession = SparkSession
       .builder()
-//      .master("local[*]")
+      .config("spark.cassandra.connection.host", host)
+      .config("spark.cassandra.auth.username", username)
+      .config("spark.cassandra.auth.password", password)
+      //      .master("local[*]")
       .appName(appName)
       .getOrCreate()
 
