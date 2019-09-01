@@ -29,7 +29,7 @@ object KafkaStreamer extends SparkSessionBuilder {
             .map(parseMachineDataJson)
             .write
             .format("org.apache.spark.sql.cassandra")
-            .options(Map("keyspace" -> "ford", "table" -> "parsed_machine_data"))
+            .options(Map("keyspace" -> "ford", "table" -> "machine"))
             .partitionBy("timestamp")
             .mode(SaveMode.Append)
             .save()

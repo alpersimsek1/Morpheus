@@ -39,10 +39,7 @@ docker cp jarpath:spark-master/path
 or mount volume
 ````
 ```
-./spark/bin/spark-submit --num-executors 6 --executor-cores 1 
---executor-memory 1G --class com.proente.Streaming.KafkaStreamer 
---packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 
---master spark://spark-master:7077 MorpheusML-assembly-0.1.jar
+./spark/bin/spark-submit --num-executors 6 --executor-cores 1 --executor-memory 1G --class com.proente.Streaming.KafkaStreamer --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 --master spark://spark-master:7077 MorpheusML-assembly-0.1.jar
 ```
 
 ## **Spark Master**
@@ -71,6 +68,13 @@ create keyspace ford with replication = {
 ````
 
 **Create Table**
+```
+CREATE TABLE ford.machine (
+machine_id int, type int, is_finish boolean, process_status int,
+  timestamp bigint, primary key (machine_id,timestamp) 
+);
+```
+
 ```
 CREATE TABLE ford.parsed_machine_data (
 machine_id text, type test, is_finish text, process_status text,
