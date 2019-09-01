@@ -1,20 +1,21 @@
 ford otosan big data project
 
-**How to build**
+## **How to build**
 
 ````
 sbt assembly 
 ````
 
-**Docker compose**
+## **Docker compose**
 
 ```
 docker-compose -p spark -f docker-compose.yml up -d --remove-orphans
+
 docker-compose -p spark -f docker-compose.yml down -v --remove-orphans
 ```
 
 
-**Spark Submit**
+## **Spark Submit**
 
 ````
 docker cp jarpath:spark-master/path
@@ -24,29 +25,42 @@ or mount volume
 ./spark/bin/spark-submit --num-executors 6 --executor-cores 1 --executor-memory 1G --class com.proente.Streaming.KafkaStreamer --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 --master spark://spark-master:7077 MorpheusML-assembly-0.1.jar
 ```
 
-**Spark Master**
+## **Spark Master**
 
 ```
 spark://spark-master:7077 
 ```
 
-*ui*
+**ui**
 
 ```
 http://localhost:8080/
 ```
 
-**Cassandra**
+## **Cassandra**
 
 ````
 cqlsh -u cassandra -p cassandra
+````
 
+**Create Keyspace**
+````
 create keyspace ford with replication = {       
  'class' : 'SimpleStrategy', 'replication_factor' :1
   } ;
-
-CREATE TABLE ford.machine_data (value text, primary key (value) );
 ````
+
+**Create Table**
+```
+CREATE TABLE ford.parsed_machine_data (
+machine_id text, type test, is_finish text, process_status text,
+  timestamp text, primary key (machine_id,timestamp) 
+);
+```
+
+```
+CREATE TABLE ford.machine_data (value text, primary key (value) );
+```
 
 
 
