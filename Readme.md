@@ -2,11 +2,26 @@ ford otosan big data project
 
 ## **How to build**
 
+First you have to create jar file of spark app with the command;
 ````
 sbt assembly 
 ````
 
+
+## **Go App**
+This app is created to connect rabbitmq to the kafka. 
+
+create docker image of this project before running pipeline. 
+
+https://github.com/alpersimsek1/RabbitmqToKafkaGoExample
+
 ## **Docker compose**
+
+Check docker compose file before running it. 
+
+You have to change volumes of spark-master and go-app. 
+
+Also, the environment configuration of the spark-workers. 
 
 ```
 docker-compose -p spark -f docker-compose.yml up -d --remove-orphans
@@ -16,13 +31,18 @@ docker-compose -p spark -f docker-compose.yml down -v --remove-orphans
 
 
 ## **Spark Submit**
+You have to change the num-executors, executor-cores, executor-memory before deploying 
+the app according to the local machines configurations. 
 
 ````
 docker cp jarpath:spark-master/path
 or mount volume
 ````
 ```
-./spark/bin/spark-submit --num-executors 6 --executor-cores 1 --executor-memory 1G --class com.proente.Streaming.KafkaStreamer --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 --master spark://spark-master:7077 MorpheusML-assembly-0.1.jar
+./spark/bin/spark-submit --num-executors 6 --executor-cores 1 
+--executor-memory 1G --class com.proente.Streaming.KafkaStreamer 
+--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 
+--master spark://spark-master:7077 MorpheusML-assembly-0.1.jar
 ```
 
 ## **Spark Master**
