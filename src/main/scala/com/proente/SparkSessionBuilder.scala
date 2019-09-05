@@ -15,7 +15,7 @@ trait SparkSessionBuilder extends Serializable {
       .config("spark.cassandra.connection.host", host)
       .config("spark.cassandra.auth.username", username)
       .config("spark.cassandra.auth.password", password)
-      //      .master("local[*]")
+      .master("local[*]")
       .appName(appName)
       .getOrCreate()
 
