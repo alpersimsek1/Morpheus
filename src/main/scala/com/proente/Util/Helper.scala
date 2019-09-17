@@ -68,14 +68,15 @@ object Helper {
   }
 
   val ISO_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+  val ISO_DATE_PATTERN_V1 = "yyyy-MM-dd'T'HH:mm:ss"
 
   val stringDateToBigInt: String => Column = s =>
-    unix_timestamp(col(s), ISO_DATE_PATTERN) * 1000 + substring(col(s), -9, 3).cast("int")
+    unix_timestamp(col(s), ISO_DATE_PATTERN_V1) * 1000 + substring(col(s), -9, 3).cast("int")
   val stringToInt: String => Column = s => col(s).cast("int")
   val stringToDouble: String => Column = s => col(s).cast("double")
   val stringToLong: String => Column = s => col(s).cast("long")
   val stringToBool: String => Column = s => col(s).cast("boolean")
-  val stringToTimestamp: String => Column = s => unix_timestamp(col(s), ISO_DATE_PATTERN).cast("timestamp")
+  val stringToTimestamp: String => Column = s => unix_timestamp(col(s), ISO_DATE_PATTERN_V1).cast("timestamp")
   val stringToBigInt: String => Column = s => col(s).cast("bigint")
 
   def reformatDF( castArray: Seq[Seq[String]], df: DataFrame ): DataFrame = {
