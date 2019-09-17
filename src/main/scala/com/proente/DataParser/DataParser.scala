@@ -6,7 +6,7 @@ import org.apache.spark.sql.{SparkSession, DataFrame}
 
 object DataParser extends SparkSessionBuilder {
   val dataBaseDir = "/home/safa/Proente/Files/ScriptExports"
-  val tables = Seq("shots", "defects", "failures", "machine_actions", "off_grades", "shots")
+  val tables: Seq[String] = Seq("defects", "failures", "goods", "machine_actions", "off_grades", "shots")
 
   override def run(spark: SparkSession): Unit = {
     tables.foreach( table => {
