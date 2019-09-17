@@ -1,4 +1,4 @@
-package com.proente.DataFetch
+package com.proente.DataFetcher
 
 import com.proente.SparkSessionBuilder
 import com.proente.Util.Helper.{readDfFromPostgresWithTableNames, writeDFToCSV}

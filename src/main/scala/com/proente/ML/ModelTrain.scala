@@ -12,11 +12,11 @@ object ModelTrain extends SparkSessionBuilder {
     import spark.implicits._
 
     val shots = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/shotHypes/*.csv").as[Shot]
-    val offGrades = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/offGrades/*.csv").as[OffGrades]
+    val offGrades = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/offGrades/*.csv").as[OffGrade]
     val machineActions = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/machineActions/*.csv").as[MachineData]
-    val goods = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/goods/*.csv").as[Goods]
-    val failures = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/failures/*.csv").as[Failures]
-    val defects = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/defects/*.csv").as[Defects]
+    val goods = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/goods/*.csv").as[Good]
+    val failures = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/failures/*.csv").as[Failure]
+    val defects = spark.read.option("header", true).option("delimiter", "|").csv("Downloads/data/defects/*.csv").as[Defect]
 
     val joinDefectsShotsDS = defects.join(shots, Seq("machine_id", "goods_id"), "left")
     joinDefectsShotsDS.show

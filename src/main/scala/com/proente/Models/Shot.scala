@@ -1,17 +1,18 @@
 package com.proente.Models
 
-case class Shot(id: String,
-                timestamp: String,
-                machine_id: String,
-                operator_id: String,
-                goods_id: String,
-                product_id: String,
-                cycle: String,
-                amount: String,
-                duration: String,
-                quality_control_id: String,
-                should_ignore: String,
-                created_at: String,
-                updated_at: String
+case class Shot(
+                 id: Integer,
+                 timestamp: BigInt,
+                 machine_id: Integer,
+                 operator_id: Integer,
+                 goods_id: Integer,
+                 product_id: Integer,
+                 cycle: BigInt,
+                 amount: BigInt,
+                 duration: BigInt,
+                 quality_control_id: Integer,
+                 should_ignore: Boolean,
+                 created_at: BigInt,
+                 updated_at: BigInt
                )
 
