@@ -23,6 +23,8 @@ You have to change volumes of spark-master and go-app.
 
 Also, the environment configuration of the spark-workers. 
 
+Also, copy "init.cql" into desired directory and change volumes of cassandra for creating keyspace and tables at the creation of container.
+
 ```
 docker-compose -p spark -f docker-compose.yml up -d --remove-orphans
 
@@ -55,6 +57,9 @@ http://localhost:8080/
 ```
 
 ## **Cassandra**
+
+### **Note:**
+*With the updated docker-compose.yml, below scripts are automatically run if volumes are set accordingly. If you faced with problems, you can use them manually.*
 
 ````
 cqlsh -u cassandra -p cassandra
