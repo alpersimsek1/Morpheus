@@ -28,7 +28,7 @@ services:
     user: root
     command: chown -R 1001:1001 /bitnami
     volumes:
-      - /home/safa/Proente/DockerVolumes/cassandra/db:/bitnami
+      - ~/Proente/DockerVolumes/cassandra/db:/bitnami
   cassandra:
     image: bitnami/cassandra:latest
     container_name: cassandra
@@ -37,8 +37,8 @@ services:
       - "9042:9042"
     # change below paths considering your own environment
     volumes:
-      - /home/safa/Proente/DockerVolumes/cassandra/db:/bitnami
-      - /home/safa/Proente/DockerVolumes/cassandra/init_scripts:/docker-entrypoint-initdb.d
+      - ~/Proente/DockerVolumes/cassandra/db:/bitnami
+      - ~/Proente/DockerVolumes/cassandra/init_scripts:/docker-entrypoint-initdb.d
     depends_on:
       - fix-cassandra-permissions
   spark-master:
@@ -54,7 +54,7 @@ services:
       - "constraint:node==spark-master"
     # change below paths considering your own environment
     volumes:
-      - /home/safa/Proente/Morpheus/target/scala-2.11/MorpheusML-assembly-0.1.jar:/MorpheusML-assembly-0.1.jar 
+      - ~/Proente/DockerVolumes/spark_master/MorpheusML-assembly-0.1.jar:/MorpheusML-assembly-0.1.jar 
       
   spark-worker-1:
     image: bde2020/spark-worker:2.4.0-hadoop2.7
@@ -90,7 +90,9 @@ services:
     image: go-kafka-connector:latest
     depends_on:
       - kafka
+    environment:
+      - QUEUE_NAME=processed_machine_action_notif
     # change below paths considering your own environment
     volumes:
-      - /home/safa/Proente/RabbitmqToKafkaGoExample:/app
+      - ~/Proente/RabbitmqToKafkaGoExample:/app
     working_dir: /app
