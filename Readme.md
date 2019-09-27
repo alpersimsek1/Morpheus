@@ -9,8 +9,7 @@ First you have to create jar file of spark app with the command;
 
 ### Go App
 
-This app is created to connect rabbitmq to the kafka.
-Create docker image of this project before running pipeline.
+This app is created to connect rabbitmq to the kafka. Create docker image of this project before running pipeline.
 
 [RabbitMQToKafkaGoExample](https://github.com/alpersimsek1/RabbitmqToKafkaGoExample)
 
