@@ -1,6 +1,7 @@
 # Ford Otosan Big Data Project
 
-This project is mainly developed for Ford Otosan, but will be generalized and converted into an easily usable form for different projects.
+This project is mainly developed for Ford Otosan, but will be generalized and 
+converted into an easily usable form for different projects.
 
 ## How to build
 
@@ -9,7 +10,8 @@ First you have to create jar file of spark app with the command;
 
 ### Go App
 
-This app is created to connect rabbitmq to the kafka. Create docker image of this project before running pipeline.
+This app is created to connect rabbitmq to the kafka. Create docker image of 
+this project before running pipeline.
 
 [RabbitMQToKafkaGoExample](https://github.com/alpersimsek1/RabbitmqToKafkaGoExample)
 
@@ -19,13 +21,18 @@ This app is created to connect rabbitmq to the kafka. Create docker image of thi
 
 * You have to change volumes of spark-master and go-app.
 
-* You can specify topics that will be created after build inside `docker-compose.yml` file by setting `KAFKA_CREATE_TOPICS`. Desired format is `"topicName:#partition:#replication"`.
+* You can specify topics that will be created after build inside 
+`docker-compose.yml` file by setting `KAFKA_CREATE_TOPICS`. Desired format is 
+`"topicName:#partition:#replication"`.
 
   * **_Example Syntax:_** `KAFKA_CREATE_TOPICS: "test:1:1"`
 
 * You should adjust the environment configuration of the spark-workers.
 
-* **Optional:** You can copy `init.cql` into desired directory and change volumes of cassandra for creating keyspace and tables at the creation of container. If `init.cql` is used, table and keyspace names should be set accordingly.
+* **Optional:** You can copy `init.cql` into desired directory and change 
+volumes of cassandra for creating keyspace and tables at the creation of 
+container. If `init.cql` is used, table and keyspace names should be set 
+accordingly.
 
 * #### _Commands_
 
@@ -35,16 +42,19 @@ This app is created to connect rabbitmq to the kafka. Create docker image of thi
   docker-compose -p spark -f docker-compose.yml down -v --remove-orphans
   ```
   
-  or you can use scaling feature of docker-compose. As an example, below command creates 3 kafka containers.
+  or you can use scaling feature of docker-compose. As an example, below 
+  command creates 3 kafka containers.
   ```bash
   docker-compose -p spark -f docker-compose.yml up --scale kafka=3 -d --remove-orphans
   ```
 
 ### Spark Submit
 
-You have to change the num-executors, executor-cores, executor-memory before deploying the app according to the local machines configurations.
+You have to change the num-executors, executor-cores, executor-memory before 
+deploying the app according to the local machines configurations.
 
-**_Note:_** You don't need to copy jar file if you have already set volume in compose file. If you want to copy file manually, you should run below command.
+**_Note:_** You don't need to copy jar file if you have already set volume in 
+compose file. If you want to copy file manually, you should run below command.
 
 ```bash
 docker cp jarpath:spark-master/path
@@ -65,7 +75,9 @@ After that, you can run app with the command below inside docker container.
 
 ### Cassandra
 
-***Note***: *With the updated docker-compose.yml, below scripts are automatically run if volumes are set accordingly. If you faced with problems, you can use them manually.*
+***Note***: *With the updated docker-compose.yml, below scripts are 
+automatically run if volumes are set accordingly. If you faced with problems, 
+you can use them manually.*
 
 ```cassandra
 cqlsh -u cassandra -p cassandra
